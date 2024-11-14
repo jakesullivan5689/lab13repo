@@ -19,13 +19,13 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Restore dependencies
-        run: dotnet restore webapp-sam-lab13/webapp-sam-lab13.sln # Restore dependencies using the solution file
+        run: dotnet restore webapp-sam-lab13/webapp-sam-lab13.csproj # Ensure correct path
 
       - name: Build with dotnet
-        run: dotnet build webapp-sam-lab13/webapp-sam-lab13.sln --configuration Release # Build using the solution file
+        run: dotnet build webapp-sam-lab13/webapp-sam-lab13.csproj --configuration Release # Ensure correct path
 
       - name: Publish the app
-        run: dotnet publish webapp-sam-lab13/webapp-sam-lab13.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp" # Publish using the csproj file
+        run: dotnet publish webapp-sam-lab13/webapp-sam-lab13.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp" # Ensure correct path
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -47,7 +47,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
